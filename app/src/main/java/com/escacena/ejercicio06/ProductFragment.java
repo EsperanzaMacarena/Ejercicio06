@@ -15,46 +15,22 @@ import android.view.ViewGroup;
 import com.escacena.ejercicio06.dummy.DummyContent;
 import com.escacena.ejercicio06.dummy.DummyContent.DummyItem;
 
+import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A fragment representing a list of Items.
- * <p/>
- * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
- * interface.
- */
 public class ProductFragment extends Fragment {
 
-    // TODO: Customize parameter argument names
-    private static final String ARG_COLUMN_COUNT = "column-count";
-    // TODO: Customize parameters
     private int mColumnCount = 1;
-    private OnListFragmentInteractionListener mListener;
+    private IProductListener productListener;
+    private List<Product> listaProductos;
+    private MyProductRecyclerViewAdapter productAdadapter;
 
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
     public ProductFragment() {
-    }
-
-    // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
-    public static ProductFragment newInstance(int columnCount) {
-        ProductFragment fragment = new ProductFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
-        fragment.setArguments(args);
-        return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        if (getArguments() != null) {
-            mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
-        }
     }
 
     @Override
@@ -71,7 +47,10 @@ public class ProductFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyProductRecyclerViewAdapter(DummyContent.ITEMS, mListener));
+            listaProductos = new ArrayList<>();
+            listaProductos.add(new Product("ENACFIRE FUTURE PLUS",4,"ANTONIO",
+                    35,3, "AURICULARES BLUETOOTH","MARTES 21 DE ENERO", 45,
+                    "https://www.amazon.es/Auriculares-Bluetooth-inal%C3%A1mbricos-Micr%C3%B3fono-reproducci%C3%B3n/dp/B07RHXN86Z"));
         }
         return view;
     }
@@ -81,7 +60,7 @@ public class ProductFragment extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         if (context instanceof OnListFragmentInteractionListener) {
-            mListener = (OnListFragmentInteractionListener) context;
+            productListener = (IProductListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnListFragmentInteractionListener");
@@ -91,7 +70,7 @@ public class ProductFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
+        productListener = null;
     }
 
     /**

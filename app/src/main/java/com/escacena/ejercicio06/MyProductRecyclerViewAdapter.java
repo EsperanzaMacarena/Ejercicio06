@@ -2,29 +2,28 @@ package com.escacena.ejercicio06;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.escacena.ejercicio06.ProductFragment.OnListFragmentInteractionListener;
-import com.escacena.ejercicio06.dummy.DummyContent.DummyItem;
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-/**
- * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
- * specified {@link OnListFragmentInteractionListener}.
- * TODO: Replace the implementation with code for your data type.
- */
+
 public class MyProductRecyclerViewAdapter extends RecyclerView.Adapter<MyProductRecyclerViewAdapter.ViewHolder> {
 
-    private final List<DummyItem> mValues;
-    private final OnListFragmentInteractionListener mListener;
+    private final List<Product> products;
+    private Context context;
+    private int layout;
 
-    public MyProductRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
-        mValues = items;
-        mListener = listener;
+    public MyProductRecyclerViewAdapter(List<Product> products, Context context, int layout) {
+        this.products = products;
+        this.context = context;
+        this.layout = layout;
     }
 
     @Override
@@ -36,43 +35,64 @@ public class MyProductRecyclerViewAdapter extends RecyclerView.Adapter<MyProduct
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.mItem = mValues.get(position);
-       // holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+        holder.mItem = products.get(position);
+        holder.rating.setText(holder.mItem.getRating());
+        holder.soldBy.setText(holder.mItem.getSoldBy());
+        holder.price.setText(holder.mItem.getPrice());
+        holder.amazonChoice.setText(holder.mItem.getAmazonChoice());
+        holder.delivery.setText(holder.mItem.getDelivery());
+        holder.commentsNumber.setText(holder.mItem.getCommentsNumber());
+        holder.deliveryPrice.setText(holder.mItem.getDeliveryPrice());
 
-        holder.mView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (null != mListener) {
-                    // Notify the active callbacks interface (the activity, if the
-                    // fragment is attached to one) that an item has been selected.
-                    mListener.onListFragmentInteraction(holder.mItem);
-                }
-            }
-        });
+        Glide
+                .with(context)
+                .load(holder.mItem.getPhotoProduct())
+                .centerCrop()
+                .into(holder.imgProduct);
     }
 
     @Override
     public int getItemCount() {
-        return mValues.size();
+        return products.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        //public final TextView mIdView;
-        public final TextView mContentView;
-        public DummyItem mItem;
+        public ImageView imgProduct;
+        public Product mItem;
+        public TextView product, rating, soldBy, price, amazonChoice,
+                delivery, commentsNumber, deliveryPrice;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-           // mIdView = (TextView) view.findViewById(R.id.item_number);
-            mContentView = (TextView) view.findViewById(R.id.content);
+            this.imgProduct = view.findViewById(R.id.imageView);
+            this.product = view.findViewById(R.id.productName);
+            this.rating = view.findViewById(R.id.productRating);
+            this.soldBy = view.findViewById(R.id.productSoldBy);
+            this.price = view.findViewById(R.id.productDeliveryPrice);
+            this.amazonChoice = view.findViewById(R.id.AmazonChoice);
+            this.delivery = view.findViewById(R.id.productDelivery);
+            this.commentsNumber = view.findViewById(R.id.productCommentsNumber);
+            this.deliveryPrice = view.findViewById(R.id.productDeliveryPrice);
+
         }
 
         @Override
         public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
+            return "ViewHolder{" +
+                    "mView=" + mView +
+                    ", imgProduct=" + imgProduct +
+                    ", mItem=" + mItem +
+                    ", product=" + product +
+                    ", rating=" + rating +
+                    ", soldBy=" + soldBy +
+                    ", price=" + price +
+                    ", amazonChoice=" + amazonChoice +
+                    ", delivery=" + delivery +
+                    ", commentsNumber=" + commentsNumber +
+                    ", deliveryPrice=" + deliveryPrice +
+                    '}';
         }
     }
 }

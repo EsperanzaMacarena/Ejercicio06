@@ -2,15 +2,16 @@ package com.escacena.ejercicio06;
 
 public class Product {
     private String product;
-    private String rating;
+    private int rating;
     private String soldBy;
-    private float price;
+    private String photoProduct;
+    private int price;
     private String amazonChoice;
     private String delivery;
     private int commentsNumber;
-    private float deliveryPrice;
+    private int deliveryPrice;
 
-    public Product(String product, String rating, String soldBy, float price,float deliveryPrice, String amazonChoice, String delivery, int commentsNumber) {
+    public Product(String product, int rating, String soldBy, int price,int deliveryPrice, String amazonChoice, String delivery, int commentsNumber, String photoProduct) {
         this.product = product;
         this.rating = rating;
         this.soldBy = soldBy;
@@ -19,6 +20,7 @@ public class Product {
         this.amazonChoice = amazonChoice;
         this.delivery = delivery;
         this.commentsNumber = commentsNumber;
+        this.photoProduct = photoProduct;
     }
 
     public String getProduct() {
@@ -29,11 +31,11 @@ public class Product {
         this.product = product;
     }
 
-    public String getRating() {
+    public int getRating() {
         return rating;
     }
 
-    public void setRating(String rating) {
+    public void setRating(int rating) {
         this.rating = rating;
     }
 
@@ -45,11 +47,11 @@ public class Product {
         this.soldBy = soldBy;
     }
 
-    public float getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
@@ -77,12 +79,20 @@ public class Product {
         this.commentsNumber = commentsNumber;
     }
 
-    public float getDeliveryPrice() {
+    public int getDeliveryPrice() {
         return deliveryPrice;
     }
 
-    public void setDeliveryPrice(float deliveryPrice) {
+    public void setDeliveryPrice(int deliveryPrice) {
         this.deliveryPrice = deliveryPrice;
+    }
+
+    public String getPhotoProduct() {
+        return photoProduct;
+    }
+
+    public void setPhotoProduct(String photoProduct) {
+        this.photoProduct = photoProduct;
     }
 
     @Override
