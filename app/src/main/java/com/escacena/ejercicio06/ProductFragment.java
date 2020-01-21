@@ -51,6 +51,15 @@ public class ProductFragment extends Fragment {
             listaProductos.add(new Product("ENACFIRE FUTURE PLUS",4,"ANTONIO",
                     35,3, "AURICULARES BLUETOOTH","MARTES 21 DE ENERO", 45,
                     "https://www.amazon.es/Auriculares-Bluetooth-inal%C3%A1mbricos-Micr%C3%B3fono-reproducci%C3%B3n/dp/B07RHXN86Z"));
+            listaProductos.add(new Product("ENACFIRE FUTURE PLUS",4,"ANTONIO",
+                    35,3, "AURICULARES BLUETOOTH","MARTES 21 DE ENERO", 45,
+                    "https://www.amazon.es/Auriculares-Bluetooth-inal%C3%A1mbricos-Micr%C3%B3fono-reproducci%C3%B3n/dp/B07RHXN86Z"));
+            listaProductos.add(new Product("ENACFIRE FUTURE PLUS",4,"ANTONIO",
+                    35,3, "AURICULARES BLUETOOTH","MARTES 21 DE ENERO", 45,
+                    "https://www.amazon.es/Auriculares-Bluetooth-inal%C3%A1mbricos-Micr%C3%B3fono-reproducci%C3%B3n/dp/B07RHXN86Z"));
+            listaProductos.add(new Product("ENACFIRE FUTURE PLUS",4,"ANTONIO",
+                    35,3, "AURICULARES BLUETOOTH","MARTES 21 DE ENERO", 45,
+                    "https://www.amazon.es/Auriculares-Bluetooth-inal%C3%A1mbricos-Micr%C3%B3fono-reproducci%C3%B3n/dp/B07RHXN86Z"));
         }
         return view;
     }
@@ -59,11 +68,11 @@ public class ProductFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnListFragmentInteractionListener) {
+        if (context instanceof IProductListener) {
             productListener = (IProductListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnListFragmentInteractionListener");
+                    + " must implement IProductListener");
         }
     }
 
@@ -73,18 +82,4 @@ public class ProductFragment extends Fragment {
         productListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onListFragmentInteraction(DummyItem item);
-    }
 }
